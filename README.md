@@ -6,6 +6,23 @@ This project is a comprehensive toolkit designed to facilitate browser automatio
 
 The primary aim of this project is to simplify and streamline the process of automating browser tasks and scraping data from websites, thereby making these tasks more accessible and efficient.
 
+## Locator Dictionary
+
+This project uses a dictionary to map string keys to Selenium's `By` locator types. This dictionary is defined in the `locator_dict.py` file as follows:
+
+```python
+from selenium.webdriver.common.by import By
+
+LOCATOR_DICT = {
+    "xpath": By.XPATH,
+    "id": By.ID,
+    "class_name": By.CLASS_NAME,
+    "css_selector": By.CSS_SELECTOR,
+    "tag_name": By.TAG_NAME,
+    "link_text": By.LINK_TEXT,
+    "name": By.NAME,
+}
+
 ## Requirements
 
 - Python 3.7+
