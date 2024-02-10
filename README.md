@@ -10,6 +10,8 @@ The primary aim of this project is to simplify and streamline the process of aut
 
 This project uses a dictionary to map string keys to Selenium's `By` locator types. This dictionary is defined in the `locator_dict.py` file as follows:
 
+
+
 ```python
 from selenium.webdriver.common.by import By
 
@@ -22,39 +24,66 @@ LOCATOR_DICT = {
     "link_text": By.LINK_TEXT,
     "name": By.NAME,
 }
-
-## Requirements
-
-- Python 3.7+
-- Selenium WebDriver
-- ChromeDriver
+```
 
 ## Installation
 
-1. Install Python 3.7 or newer.
-2. Install Selenium WebDriver using pip: `pip install selenium`.
-3. Download the latest version of ChromeDriver from the official website and install it according to the instructions.
+1. Install the required packages:
+```bash
+pip install selenium
+```
+2. Download ChromeDriver compatible with your version of Google Chrome.
+3. Clone the repository:
+    git clone https://github.com/Markowian22/WEB_SCRAPER.git
+4. Navigate to the project directory:
+    cd WEB_SCRPAER
+5. Install the package:
+    pip install .
+
+
 
 ## Usage
-
-1. Import the `Connector` and `Operations` classes from this project.
-2. Create an instance of the `Operations` class, passing the URL of the website you want to interact with.
-3. Use the methods of the `Operations` class to interact with the website.
-
-## Example
-
+After installing the package, you can import it in your Python script:
 ```python
-from connector import Connector
 from operations import Operations
 
 # Create an instance of the Operations class
-ops = Operations("https://www.example.com")
+operations = Operations("https://www.example.com")
 
 # Open the webpage
-ops.open_web()
+operations.open_web()
 
 # Click a button on the webpage
-ops.click_on_button("//button[@id='my-button']")
+operations.click_on_button("//button[@id='submit']")
 
-# Close the webpage
-ops.close_web()
+# Input text into a field on the webpage
+operations.send_keys("Hello, World!", "input_field")
+
+# Press ENTER in a field on the webpage
+operations.click_ENTER("input_field")
+
+# Retrieve text from an element on the webpage
+text = operations.get_text_from_element("//div[@class='content']")
+
+# Retrieve all elements of a specified type on the webpage
+elements = operations.get_all("//div[@class='content']")
+
+# Retrieve one element of a specified type on the webpage
+element = operations.get_one_element("//div[@class='content']")
+
+# Scroll the webpage to the last element of a specified type
+operations.scroll_to_last_element("//div[@class='content']")
+
+# Scroll the webpage to a specified element
+operations.scroll_to_element("//div[@class='content']")
+
+# Scroll the webpage to the bottom
+operations.scroll_to_down_page()
+
+# Wait until the number of 'div' elements on the webpage stops increasing
+operations.wait_for_all_element_on_website()
+
+# Close the Chrome WebDriver and the associated webpage
+operations.close_web()
+```
+
