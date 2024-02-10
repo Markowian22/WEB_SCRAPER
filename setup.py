@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="WEB_SCRAPER_EASY",
-    version="0.2",
+    version="0.6",
     description="Library to facviliate webscraping",
     packages=find_packages("src"),
     package_dir={"": "src"},

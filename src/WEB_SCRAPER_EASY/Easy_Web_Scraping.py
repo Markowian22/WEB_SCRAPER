@@ -13,10 +13,20 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from locator_dict import LOCATOR_DICT
+from .locator_dict import LOCATOR_DICT
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# LOCATOR_DICT = {
+#     "xpath": By.XPATH,
+#     "id": By.ID,
+#     "class_name": By.CLASS_NAME,
+#     "css_selector": By.CSS_SELECTOR,
+#     "tag_name": By.TAG_NAME,
+#     "link_text": By.LINK_TEXT,
+#     "name": By.NAME,
+# }
 
 
 class Connector:
@@ -310,7 +320,7 @@ class Operations(Connector):
         old_len = 0
         while True:
             try:
-                WebDriverWait(self.driver, 10).until(
+                WebDriverWait(self.driver, 5).until(
                     lambda driver: len(driver.find_elements(By.TAG_NAME, "div"))
                     != old_len
                 )
@@ -320,3 +330,13 @@ class Operations(Connector):
             except Exception as e:
                 logger.error(f"Error while waiting for all elements on website: {e}")
                 break
+
+    def sprawdz_element(self, element: str, locator_type="xpath"):
+        by = LOCATOR_DICT[locator_type]
+        try:
+            element = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located((by, element))
+            )
+            return element.is_displayed()
+        except Exception as e:
+            logger.error(f"The element is not visible on the page: {e}")
